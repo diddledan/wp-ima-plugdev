@@ -1,0 +1,16 @@
+.plugin-directory-row {
+    display: flex;
+}
+.plugin-directory-row .plugin-logo {
+    margin-right: 1em;
+}
+.plugin-directory-row .plugin-logo img {
+    max-width: 128px;
+    width: 100%;
+}
+.plugin-directory-row .plugin-excerpt {
+    width: auto;
+}
+.plugin-directory-plugin .plugin-banner img {
+    max-width: 100%;
+}
