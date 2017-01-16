@@ -37,6 +37,7 @@ function ima_plugdev_fetch_readme( $post_id = 0 ) {
 			}
 		}
 	}
+	$readme->logos = array();
 	foreach ( array( '256x256', '128x128' ) as $size ) {
 		foreach ( array( 'png', 'jpg' ) as $extension ) {
 			$url    = "https://plugins.svn.wordpress.org/{$slug}/assets/icon-{$size}.{$extension}";

@@ -70,8 +70,8 @@ function ima_plugdev_plugin_excerpt() {
 	echo get_ima_plugdev_plugin_excerpt();
 }
 
-function have_ima_plugdev_plugin_banner( $size = '772x250', $post_id = 0 ) {
-	return '' !== get_ima_plugdev_plugin_banner_url( $size, $post_id );
+function have_ima_plugdev_plugin_banner( $post_id = 0 ) {
+	return '' !== get_ima_plugdev_plugin_banner_url( '1x', $post_id );
 }
 function get_ima_plugdev_plugin_banner_url( $size = '1x', $post_id = 0 ) {
 	$sizes = array( '1x' => '772x250', '2x' => '1544x500' );
@@ -99,7 +99,7 @@ function ima_plugdev_plugin_banner( $post_id = 0 ) {
 }
 
 function have_ima_plugdev_plugin_logo( $post_id = 0 ) {
-	return ( '' !== get_ima_plugdev_plugin_logo_url( '1x', $post_id ) || get_ima_plugdev_plugin_logo_url( '2x', $post_id ) );
+	return ( '' !== get_ima_plugdev_plugin_logo_url( '1x', $post_id ) );
 }
 function get_ima_plugdev_plugin_logo_url( $size = '1x', $post_id = 0 ) {
 	$sizes = array( '1x' => '128x128', '2x' => '256x256' );
