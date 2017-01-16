@@ -1,6 +1,6 @@
 <?php
-add_filter( 'the_content', 'ima_plugdev_the_content' );
-function ima_plugdev_the_content( $content ) {
+add_filter( 'the_content', 'ima_plugdev_the_content_filter' );
+function ima_plugdev_the_content_filter( $content ) {
 	if ( is_singular( 'my-plugin' ) ) {
 	    unset( $content );
 		if ( ! ima_plugdev_fetch_readme() ) {
@@ -27,11 +27,27 @@ function ima_plugdev_the_content( $content ) {
 	return $content;
 }
 
+add_filter( 'get_the_excerpt', 'ima_plugdev_the_excerpt_filter', 10, 2 );
+function ima_plugdev_the_excerpt_filter( $excerpt, $post ) {
+	if ( 'my-plugin' === $post->post_type ) {
+		unset( $excerpt );
+		unset( $post );
+		ob_start();
+		if ( locate_template( 'excerpt-my-plugin.php', false ) ) {
+			get_template_part( 'excerpt', 'my-plugin' );
+		} else {
+			include( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'excerpt-my-plugin.php' );
+		}
+		return ob_get_clean();
+	}
+	return $excerpt;
+}
+
 function get_ima_plugdev_plugin_version( $post_id = 0 ) {
 	$readme = ima_plugdev_fetch_readme( $post_id );
 	return isset( $readme->version ) ? $readme->version : '';
 }
-function ima_plugdev_plugin_version() {
+function the_ima_plugdev_plugin_version() {
 	echo esc_html( get_ima_plugdev_plugin_version() );
 }
 
@@ -47,7 +63,7 @@ function get_ima_plugdev_plugin_zip( $post_id = 0 ) {
 	$readme = ima_plugdev_fetch_readme( $post_id );
 	return isset( $readme->download_link ) ? $readme->download_link : '';
 }
-function ima_plugdev_plugin_zip() {
+function the_ima_plugdev_plugin_zip() {
 	echo esc_url( get_ima_plugdev_plugin_zip() );
 }
 
@@ -55,7 +71,7 @@ function get_ima_plugdev_plugin_description( $post_id = 0 ) {
 	$readme = ima_plugdev_fetch_readme( $post_id );
 	return isset( $readme->sections['description'] ) ? $readme->sections['description'] : '';
 }
-function ima_plugdev_plugin_description() {
+function the_ima_plugdev_plugin_description() {
 	echo get_ima_plugdev_plugin_description();
 }
 
@@ -66,7 +82,7 @@ function get_ima_plugdev_plugin_excerpt( $post_id = 0 ) {
 	}
 	return '';
 }
-function ima_plugdev_plugin_excerpt() {
+function the_ima_plugdev_plugin_excerpt() {
 	echo get_ima_plugdev_plugin_excerpt();
 }
 
@@ -94,7 +110,7 @@ function get_ima_plugdev_plugin_banner( $post_id = 0 ) {
 	}
 	return '';
 }
-function ima_plugdev_plugin_banner( $post_id = 0 ) {
+function the_ima_plugdev_plugin_banner( $post_id = 0 ) {
 	echo get_ima_plugdev_plugin_banner( $post_id );
 }
 
@@ -122,6 +138,6 @@ function get_ima_plugdev_plugin_logo( $post_id = 0 ) {
 	}
 	return '';
 }
-function ima_plugdev_plugin_logo( $post_id = 0 ) {
+function the_ima_plugdev_plugin_logo( $post_id = 0 ) {
 	echo get_ima_plugdev_plugin_logo( $post_id );
 }
