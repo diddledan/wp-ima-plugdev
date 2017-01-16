@@ -8,3 +8,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Showcase the plugins you have in the WordPress.org Plugin Directory on your own site
+
+== Description ==
+
+Portions of code are heavily influenced by [I make plugins](https://wordpress.org/plugins/i-make-plugins/) by
+[Mark Jaquith](https://profiles.wordpress.org/markjaquith/).
