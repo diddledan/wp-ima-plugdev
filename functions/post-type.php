@@ -55,3 +55,9 @@ function ima_plugdev_add_posttype() {
 	register_post_type( 'my-plugin', $args );
 }
 add_action( 'init', 'ima_plugdev_add_posttype', 0 );
+
+function ima_plugdev_add_cpt_to_jetpack_sitemap( $post_types ) {
+	$post_types[] = 'my-plugin';
+	return $post_types;
+}
+add_filter( 'jetpack_sitemap_post_types', 'ima_plugdev_add_cpt_to_jetpack_sitemap' );
