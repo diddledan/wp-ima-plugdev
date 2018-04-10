@@ -1,25 +1,22 @@
 <?php
 function ima_plugdev_fetch_readme( $post_id = 0 ) {
-	static $cache = array();
-
 	if ( 0 === $post_id ) {
 		$post_id = get_the_ID();
 	}
 
 	$slug = ima_plugdev_get_slug( $post_id );
 
-	if ( $cache[ $slug ] ) {
-		return $cache[ $slug ];
-	}
-	$rm = get_post_meta( $post_id, '_ima_plugdev_readme', true );
-	if ( $rm ) {
-		if ( $rm['timestamp'] > time() - 7200 ) {
-			$cache[ $slug ] = $rm['readme'];
-			return $rm['readme'];
-		}
+	if ( ! $slug ) {
+		return false;
 	}
 
-	require_once( ABSPATH . '/wp-admin/includes/plugin-install.php' );
+	$transient = 'ima-plugdev-' . $slug;
+	$readme    = get_transient( $transient );
+	if ( $readme ) {
+		return $readme;
+	}
+
+	require_once ABSPATH . '/wp-admin/includes/plugin-install.php';
 	$readme = plugins_api( 'plugin_information', array( 'slug'   => $slug,
 	                                                    'fields' => array( 'short_description' => true )
 	) );
@@ -48,8 +45,7 @@ function ima_plugdev_fetch_readme( $post_id = 0 ) {
 		}
 	}
 
-	$cache[ $slug ] = $readme;
-	update_post_meta( $post_id, '_ima_plugdev_readme', array( 'timestamp' => time(), 'readme' => $readme ) );
+	set_transient( $transient, $readme, 24 * 60 * 60 );
 
 	return $readme;
 }
