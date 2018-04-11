@@ -10,6 +10,10 @@ function ima_plugdev_fetch_readme( $post_id = 0 ) {
 		return false;
 	}
 
+	return ima_plugdev_fetch_readme_by_slug( $slug );
+}
+
+function ima_plugdev_fetch_readme_by_slug( $slug ) {
 	$transient = 'ima-plugdev-' . $slug;
 	$readme    = get_transient( $transient );
 	if ( $readme ) {
