@@ -18,6 +18,10 @@ Portions of code are heavily influenced by [I make plugins](https://wordpress.or
 
 == Changelog ==
 
+= 2.1.0 =
+
+* Re-add function `ima_plugdev_fetch_readme_by_slug()`
+
 = 2.0.0 =
 
 * Switch from post_meta to transients api
