@@ -3,7 +3,7 @@ Contributors: diddledan
 Tags: WordPress.org, repository, plugin
 Requires at least: 4.5
 Tested up to: 4.9
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,10 @@ Portions of code are heavily influenced by [I make plugins](https://wordpress.or
 [Mark Jaquith](https://profiles.wordpress.org/markjaquith/).
 
 == Changelog ==
+
+= 2.2.0 =
+
+* disable parsing shortcodes in the plugin readme
 
 = 2.1.0 =
 

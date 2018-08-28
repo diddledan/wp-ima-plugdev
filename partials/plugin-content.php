@@ -2,6 +2,7 @@
 add_filter( 'the_content', 'ima_plugdev_the_content_filter' );
 function ima_plugdev_the_content_filter( $content ) {
 	if ( is_singular( 'my-plugin' ) ) {
+		remove_filter( 'the_content', 'do_shortcode', 11 );
 	    unset( $content );
 		if ( ! ima_plugdev_fetch_readme() ) {
 			return __( 'Could not load plugin readme.txt from WordPress.org', 'ima-plugdev' );
@@ -15,6 +16,7 @@ function ima_plugdev_the_content_filter( $content ) {
 		return ob_get_clean();
 	}
 	if ( is_post_type_archive( 'my-plugin' ) ) {
+		remove_filter( 'the_content', 'do_shortcode', 11 );
 	    unset( $content );
 		ob_start();
 		if ( locate_template( 'excerpt-my-plugin.php', false ) ) {

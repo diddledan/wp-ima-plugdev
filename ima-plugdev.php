@@ -3,7 +3,7 @@
  * Plugin Name: I'm a Plugin Developer
  * Plugin URI: https://www.bowlhat.net/
  * Description: Showcase the plugins you have in the WordPress.org Plugin Directory
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: Daniel Llewellyn
  * Author URI: https://www.bowlhat.net
  * License: GPLv2
