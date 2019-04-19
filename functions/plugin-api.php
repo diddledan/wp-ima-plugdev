@@ -20,8 +20,9 @@ function ima_plugdev_fetch_readme( $post_id = 0 ) {
 	}
 
 	require_once( ABSPATH . '/wp-admin/includes/plugin-install.php' );
-	$readme = plugins_api( 'plugin_information', array( 'slug'   => $slug,
-	                                                    'fields' => array( 'short_description' => true )
+	$readme = plugins_api( 'plugin_information', array(
+		'slug'   => $slug,
+		'fields' => array( 'short_description' => true ),
 	) );
 	if ( is_wp_error( $readme ) ) {
 		return false;
@@ -42,14 +43,17 @@ function ima_plugdev_fetch_readme( $post_id = 0 ) {
 		foreach ( array( 'png', 'jpg' ) as $extension ) {
 			$url    = "https://plugins.svn.wordpress.org/{$slug}/assets/icon-{$size}.{$extension}";
 			$result = wp_remote_head( $url );
-			if ( ! is_wp_error( $result ) && 200 == $result[ 'response' ][ 'code' ] ) {
+			if ( ! is_wp_error( $result ) && 200 == $result['response']['code'] ) {
 				$readme->logos[ $size ] = $url;
 			}
 		}
 	}
 
 	$cache[ $slug ] = $readme;
-	update_post_meta( $post_id, '_ima_plugdev_readme', array( 'timestamp' => time(), 'readme' => $readme ) );
+	update_post_meta( $post_id, '_ima_plugdev_readme', array(
+		'timestamp' => time(),
+		'readme'    => $readme,
+	) );
 
 	return $readme;
 }

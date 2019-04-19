@@ -17,7 +17,7 @@ function ima_plugdev_metabox() {
 
 	wp_nonce_field( 'ima-plugdev', '_ima_plugdev_nonce' );
 
-	$slug = get_post_meta( $post->ID, '_ima_plugdev_slug', true );
+	$slug    = get_post_meta( $post->ID, '_ima_plugdev_slug', true );
 	$retired = get_post_meta( $post->ID, '_ima_plugdev_retired', true );
 	?>
 	<div>

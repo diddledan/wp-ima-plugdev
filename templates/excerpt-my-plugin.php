@@ -1,7 +1,7 @@
 <div class="plugin-directory-row">
 	<?php if ( have_ima_plugdev_plugin_logo() ) : ?>
 		<div class="plugin-logo">
-            <?php the_ima_plugdev_plugin_logo(); ?>
+			<?php the_ima_plugdev_plugin_logo(); ?>
 		</div>
 	<?php endif; ?>
 

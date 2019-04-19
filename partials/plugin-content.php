@@ -2,7 +2,7 @@
 add_filter( 'the_content', 'ima_plugdev_the_content_filter' );
 function ima_plugdev_the_content_filter( $content ) {
 	if ( is_singular( 'my-plugin' ) ) {
-	    unset( $content );
+		unset( $content );
 		if ( ! ima_plugdev_fetch_readme() ) {
 			return __( 'Could not load plugin readme.txt from WordPress.org', 'ima-plugdev' );
 		}
@@ -10,12 +10,12 @@ function ima_plugdev_the_content_filter( $content ) {
 		if ( locate_template( 'content-my-plugin.php', false ) ) {
 			get_template_part( 'content', 'my-plugin' );
 		} else {
-		    include( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'content-my-plugin.php' );
-        }
+			include( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'content-my-plugin.php' );
+		}
 		return ob_get_clean();
 	}
 	if ( is_post_type_archive( 'my-plugin' ) ) {
-	    unset( $content );
+		unset( $content );
 		ob_start();
 		if ( locate_template( 'excerpt-my-plugin.php', false ) ) {
 			get_template_part( 'excerpt', 'my-plugin' );
@@ -77,7 +77,7 @@ function the_ima_plugdev_plugin_description() {
 
 function get_ima_plugdev_plugin_excerpt( $post_id = 0 ) {
 	$readme = ima_plugdev_fetch_readme( $post_id );
-	if ( isset( $readme->short_description ) && !empty( $readme->short_description ) ) {
+	if ( isset( $readme->short_description ) && ! empty( $readme->short_description ) ) {
 		return $readme->short_description;
 	}
 	return '';
@@ -90,7 +90,11 @@ function have_ima_plugdev_plugin_banner( $post_id = 0 ) {
 	return '' !== get_ima_plugdev_plugin_banner_url( '1x', $post_id );
 }
 function get_ima_plugdev_plugin_banner_url( $size = '1x', $post_id = 0 ) {
-	$sizes = array( '1x' => '772x250', '2x' => '1544x500' );
+	$sizes = array(
+		'1x' => '772x250',
+		'2x' => '1544x500',
+	);
+
 	$dimensions = $sizes[ $size ];
 
 	$readme = ima_plugdev_fetch_readme( $post_id );
@@ -100,13 +104,14 @@ function get_ima_plugdev_plugin_banner_url( $size = '1x', $post_id = 0 ) {
 	return '';
 }
 function get_ima_plugdev_plugin_banner( $post_id = 0 ) {
-	$banner = get_ima_plugdev_plugin_banner_url( '1x', $post_id );
+	$banner   = get_ima_plugdev_plugin_banner_url( '1x', $post_id );
 	$banner2x = get_ima_plugdev_plugin_banner_url( '2x', $post_id );
 	if ( '' !== $banner ) {
+		/* Translators: %s is the name of a plugin */
 		return '<img alt="' . esc_attr( sprintf( __( 'Banner for the %s plugin', 'ima-plugdev' ), get_the_title( $post_id ) ) ) . '" ' .
-		       'src="' . esc_attr( $banner ) . '" ' .
-		       ( ( $banner2x ) ? 'srcset="' . esc_attr( $banner2x ) . ' 2x" ' : '' ) .
-		       '/>';
+			'src="' . esc_attr( $banner ) . '" ' .
+			( ( $banner2x ) ? 'srcset="' . esc_attr( $banner2x ) . ' 2x" ' : '' ) .
+			'/>';
 	}
 	return '';
 }
@@ -118,7 +123,11 @@ function have_ima_plugdev_plugin_logo( $post_id = 0 ) {
 	return ( '' !== get_ima_plugdev_plugin_logo_url( '1x', $post_id ) );
 }
 function get_ima_plugdev_plugin_logo_url( $size = '1x', $post_id = 0 ) {
-	$sizes = array( '1x' => '128x128', '2x' => '256x256' );
+	$sizes = array(
+		'1x' => '128x128',
+		'2x' => '256x256',
+	);
+
 	$dimensions = $sizes[ $size ];
 
 	$readme = ima_plugdev_fetch_readme( $post_id );
@@ -128,13 +137,14 @@ function get_ima_plugdev_plugin_logo_url( $size = '1x', $post_id = 0 ) {
 	return '';
 }
 function get_ima_plugdev_plugin_logo( $post_id = 0 ) {
-	$logo = get_ima_plugdev_plugin_logo_url( '1x', $post_id );
+	$logo   = get_ima_plugdev_plugin_logo_url( '1x', $post_id );
 	$logo2x = get_ima_plugdev_plugin_logo_url( '2x', $post_id );
 	if ( '' !== $logo ) {
+		/* Translators: %s is the name of a plugin */
 		return '<img alt="' . esc_attr( sprintf( __( '%s plugin logo', 'ima-plugdev' ), get_the_title( $post_id ) ) ) . '" ' .
-		       'src="' . esc_attr( $logo ) . '" ' .
-		       ( ( $logo2x ) ? 'srcset="' . esc_attr( $logo2x ) . ' 2x" ' : '' ) .
-		       '/>';
+				'src="' . esc_attr( $logo ) . '" ' .
+				( ( $logo2x ) ? 'srcset="' . esc_attr( $logo2x ) . ' 2x" ' : '' ) .
+				'/>';
 	}
 	return '';
 }

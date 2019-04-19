@@ -70,10 +70,10 @@ function ima_plugdev_listing_init() {
 
 	// Javascripts: autoload.
 	if ( is_admin() ) {
-		$glob = glob( $dir . 'scripts/admin/*.js' );
+		$glob  = glob( $dir . 'scripts/admin/*.js' );
 		$admin = 'admin/';
 	} else {
-		$glob = glob( $dir . 'scripts/*.js' );
+		$glob  = glob( $dir . 'scripts/*.js' );
 		$admin = '';
 	}
 
@@ -81,7 +81,7 @@ function ima_plugdev_listing_init() {
 		$matches = array();
 		preg_match( '!([^/]+).js$!', $filename, $matches );
 		$code = 'ima-plugdev-' . $matches[1];
-		$url = plugins_url( 'scripts/' . $admin . $matches[1] . '.js', __FILE__ );
+		$url  = plugins_url( 'scripts/' . $admin . $matches[1] . '.js', __FILE__ );
 		wp_enqueue_script( $code, $url, array( 'jquery' ), null, true );
 	}
 
@@ -92,7 +92,7 @@ function ima_plugdev_listing_init() {
 		$matches = array();
 		preg_match( '!([^/]+).css!', $filename, $matches );
 		$code = 'ima-plugdev-css-' . $matches[1];
-		$url = plugins_url( $matches[1] . '.css', __FILE__ );
+		$url  = plugins_url( $matches[1] . '.css', __FILE__ );
 
 		if ( 'admin' !== $matches[1] || is_admin() ) {
 			wp_enqueue_style( $code, $url );
